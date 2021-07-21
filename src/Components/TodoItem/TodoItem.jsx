@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Form } from "react-bootstrap";
+import { TodoContext } from "../../App";
 
-export default function TodoItem( { checkItem, todoItem, dispatch } ) {
+export default function TodoItem( { checkItem, todoId } ) {
+  const { dispatch } = useContext(TodoContext);
   return (
     <Form.Group
       className="mb-3"
-      controlId={`checkItem${todoItem.id}${checkItem.id}`}
+      controlId={`checkItem${todoId}${checkItem.id}`}
     >
       <Form.Check
         checked={checkItem.isDone}
@@ -13,7 +15,7 @@ export default function TodoItem( { checkItem, todoItem, dispatch } ) {
         label={checkItem.title}
         onChange={() => dispatch({
           type: "change_isDone_status",
-          payload: { todoId: todoItem.id, checkId: checkItem.id },
+          payload: { todoId, checkId: checkItem.id },
         })}
       />
     </Form.Group>

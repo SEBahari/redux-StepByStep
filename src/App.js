@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { createContext, useReducer } from "react";
 import Todo from "./Components/Todo/Todo";
 
 const initialState = {
@@ -54,6 +54,8 @@ function reducer( state, action ) {
   }
 }
 
+export const TodoContext = createContext();
+
 /* ************************************************************************** */
 function App() {
   const [ state, dispatch ] = useReducer(reducer, initialState);
@@ -73,21 +75,21 @@ function App() {
     });
   };
 
+  const value = { state, dispatch };
   return (
-    <div className={"container-fluid pt-3 "}>
-      <div className={"d-flex justify-content-end"}>
-        <button
-          className={"btn btn-primary"}
-          onClick={handleNew}
-        >add new
-        </button>
+    <TodoContext.Provider value={value}>
+      <div className={"container-fluid pt-3 "}>
+        <div className={"d-flex justify-content-end"}>
+          <button
+            className={"btn btn-primary"}
+            onClick={handleNew}
+          >add new
+          </button>
+        </div>
+        <hr/>
+        <Todo/>
       </div>
-      <hr/>
-      <Todo
-        todoList={state.todoList}
-        dispatch={dispatch}
-      />
-    </div>
+    </TodoContext.Provider>
   );
 }
 

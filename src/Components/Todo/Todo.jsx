@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import TodoItem from "../TodoItem/TodoItem";
+import { TodoContext } from "../../App";
 
-const Todo = ( { todoList, dispatch } ) => {
+const Todo = () => {
+  const { state, dispatch } = useContext(TodoContext);
+  const todoList = state.todoList;
   return (
     <>
       {
@@ -20,9 +23,8 @@ const Todo = ( { todoList, dispatch } ) => {
               {todo.checkList.map(checkItem => (
                 <TodoItem
                   key={`${todo.id}${checkItem.id}`}
-                  todoItem={todo}
+                  todoId={todo.id}
                   checkItem={checkItem}
-                  dispatch={dispatch}
                 />
               ))}
             </div>
