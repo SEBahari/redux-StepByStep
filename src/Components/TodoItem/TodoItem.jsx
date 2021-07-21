@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Form } from "react-bootstrap";
-import { TodoContext } from "../../App";
+import { TodoContext } from "../../Context/TodoContext/TodoContext";
 
 export default function TodoItem( { checkItem, todoId } ) {
   const { dispatch } = useContext(TodoContext);
