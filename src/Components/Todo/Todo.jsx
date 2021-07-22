@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import TodoItem from "../TodoItem/TodoItem";
-import { TodoContext } from "../../Context/TodoContext/TodoContext";
+import { useDispatch, useSelector } from "react-redux";
 
 const Todo = () => {
-  const { state, dispatch } = useContext(TodoContext);
-  const todoList = state.todoList;
+  const dispatch = useDispatch();
+  const todoList = useSelector(state => state.todo.todoList);
   return (
     <>
       {
@@ -28,7 +28,7 @@ const Todo = () => {
                 />
               ))}
             </div>
-            <hr/>
+            <hr />
           </div>
         ))
       }

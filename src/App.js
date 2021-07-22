@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React from "react";
 import Todo from "./Components/Todo/Todo";
-import { TodoContext } from "./Context/TodoContext/TodoContext";
+import { useDispatch } from "react-redux";
+import { addTodo } from './store/Todo.Reducer/Todo.actions'
 
 /* ************************************************************************** */
 function App() {
-  const { dispatch } = useContext(TodoContext);
+  const dispatch = useDispatch();
 
   const handleNew = () => {
     const id = Date.now();
@@ -15,10 +16,7 @@ function App() {
       { id: 2, title: "check2", isDone: false },
       { id: 3, title: "check3", isDone: false },
     ];
-    dispatch({
-      type: "add_todo",
-      payload: { id, title, description, checkList },
-    });
+    dispatch(addTodo({ id, title, description, checkList }));
   };
 
   return (
@@ -30,10 +28,15 @@ function App() {
         >add new
         </button>
       </div>
-      <hr/>
-      <Todo/>
+      <hr />
+      <Todo />
     </div>
   );
 }
+
+// function mapStateToProps( state ) {
+//   const { todo } = state;
+//   return { todoList: todo.todoList };
+// }
 
 export default App;

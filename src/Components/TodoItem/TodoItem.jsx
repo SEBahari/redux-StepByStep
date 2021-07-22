@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Form } from "react-bootstrap";
-import { TodoContext } from "../../Context/TodoContext/TodoContext";
+import { useDispatch } from "react-redux";
 
-export default function TodoItem( { checkItem, todoId } ) {
-  const { dispatch } = useContext(TodoContext);
+function TodoItem({ checkItem, todoId }) {
+  const dispatch = useDispatch();
   return (
     <Form.Group
       className="mb-3"
@@ -21,3 +21,5 @@ export default function TodoItem( { checkItem, todoId } ) {
     </Form.Group>
   );
 };
+
+export default TodoItem;
